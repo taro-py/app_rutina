@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "LifeSync Agent",
+    "slug": "lifesync-agent",
+    "scheme": "lifesync-agent",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "platforms": ["ios", "android", "web"],
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
+
