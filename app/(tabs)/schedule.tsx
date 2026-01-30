@@ -43,7 +43,7 @@ export default function ScheduleTabScreen() {
 
       <Timeline blocks={blocks} onPressBlock={(b) => (!b.locked ? setEditing(b) : undefined)} />
 
-      <View className="absolute bottom-6 left-0 right-0 items-center px-4">
+      <View className="absolute bottom-20 left-0 right-0 items-center px-4">
         <View className="w-full max-w-[520px] flex-row gap-2 rounded-3xl border border-gray-100 bg-white p-2 shadow-sm">
           <Pressable
             accessibilityRole="button"

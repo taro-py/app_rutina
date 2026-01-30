@@ -10,12 +10,12 @@ export function Timeline(props: {
   const blocks = props.blocks.slice().sort((a, b) => a.startMinutes - b.startMinutes);
 
   return (
-    <ScrollView contentContainerClassName="px-4 pb-24 pt-3">
+    <ScrollView contentContainerClassName="px-4 pb-32 pt-3">
       <View className="gap-3">
         {blocks.length === 0 ? (
           <View className="rounded-2xl border border-gray-100 bg-white p-4">
             <Text className="text-[13px] text-gray-600">
-              Aún no hay horario. Ve a la pestaña “Asistente” para configurar tu día y generar tu horario.
+              Aún no hay horario. Abre el menú (arriba a la derecha), elige Chatbox, escribe tus preferencias y pide que genere tu horario. Antes: “Asistente” para configurar tu día y generar tu horario.
             </Text>
           </View>
         ) : (

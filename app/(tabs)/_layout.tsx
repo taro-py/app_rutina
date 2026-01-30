@@ -1,43 +1,37 @@
-import { Tabs } from "expo-router";
-import { Text, View } from "react-native";
-
-function TabIcon({ name, focused }: { name: string; focused: boolean }) {
-  const emoji = name === "Asistente" ? "💬" : "📅";
-  return (
-    <View className="items-center justify-center gap-0.5">
-      <Text className="text-[18px]">{emoji}</Text>
-      <Text className={`text-[10px] font-medium ${focused ? "text-black" : "text-gray-500"}`} numberOfLines={1}>
-        {name}
-      </Text>
-    </View>
-  );
-}
+import { Stack } from "expo-router";
+import { View, Pressable, Text } from "react-native";
+import { useRouter } from "expo-router";
+import { AppHeader } from "@/components/AppHeader";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function TabsLayout() {
+  const router = useRouter();
+
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-        tabBarActiveTintColor: "#000",
-        tabBarInactiveTintColor: "#6b7280",
-        tabBarStyle: { backgroundColor: "#fff", borderTopColor: "#f3f4f6", paddingTop: 6 },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Asistente",
-          tabBarIcon: ({ focused }) => <TabIcon name="Asistente" focused={focused} />,
-        }}
-      />
-      <Tabs.Screen
-        name="schedule"
-        options={{
-          title: "Mi horario",
-          tabBarIcon: ({ focused }) => <TabIcon name="Mi horario" focused={focused} />,
-        }}
-      />
-    </Tabs>
+    <View className="flex-1 bg-white">
+      <AppHeader />
+      <View className="flex-1" style={{ paddingBottom: 0 }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "#ffffff" },
+          }}
+        >
+          <Stack.Screen name="index" />
+          <Stack.Screen name="schedule" />
+          <Stack.Screen name="settings" />
+        </Stack>
+      </View>
+      {/* Tuerca abajo para Ajustes */}
+      <View className="border-t border-gray-100 bg-white px-4 py-3">
+        <Pressable
+          onPress={() => router.push("/(tabs)/settings")}
+          className="flex-row items-center justify-center gap-2 rounded-xl py-2 active:bg-gray-50"
+        >
+          <Ionicons name="settings-outline" size={22} color="#6b7280" />
+          <Text className="text-[14px] font-medium text-gray-600">Ajustes</Text>
+        </Pressable>
+      </View>
+    </View>
   );
 }
