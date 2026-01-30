@@ -21,6 +21,8 @@ export interface DayProfile {
   fixedBlocks: FixedBlockInput[];
   sleepStart?: TimeHM;
   sleepEnd?: TimeHM;
+  /** Qué quieres hacer hoy (texto libre del asistente) */
+  dailyGoal?: string;
 }
 
 export interface TaskRequest {
@@ -49,6 +51,7 @@ export interface AgentWarning {
     | "SLEEP_LOW"
     | "DAY_RANGE_INVALID"
     | "OVERBOOKED"
+    | "WORK_OVERLOAD"
     | "TASK_TRUNCATED"
     | "FIXED_OVERLAP"
     | "AUTOFILL_INSERTED";

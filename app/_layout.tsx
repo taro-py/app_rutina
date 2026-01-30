@@ -10,9 +10,12 @@ export default function RootLayout() {
         screenOptions={{
           headerShadowVisible: false,
           headerTitleStyle: { fontWeight: "600" },
-          contentStyle: { backgroundColor: "#ffffff" }
+          contentStyle: { backgroundColor: "#ffffff" },
         }}
-      />
+      >
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="day-setup" options={{ title: "Configuración" }} />
+      </Stack>
     </SafeAreaProvider>
   );
 }

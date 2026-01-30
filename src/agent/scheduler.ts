@@ -258,6 +258,15 @@ export function generateSchedule(profile: DayProfile, tasks: TaskRequest[], seed
     });
   }
 
+  // Advertencia: más de 8h de tareas productivas en el mismo día (exceso de trabajo)
+  const totalTaskMinutes = tasks.reduce((sum, t) => sum + t.durationMinutes, 0);
+  if (totalTaskMinutes > 8 * 60) {
+    warnings.push({
+      code: "WORK_OVERLOAD",
+      message: "Las tareas suman más de 8 horas hoy. Considera reducir la carga para evitar exceso de trabajo.",
+    });
+  }
+
   const all = [...occupied, ...planned].sort((a, b) => a.startMinutes - b.startMinutes);
   return { blocks: all, warnings };
 }

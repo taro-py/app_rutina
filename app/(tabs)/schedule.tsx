@@ -8,7 +8,7 @@ import { EditBlockModal } from "@/components/schedule/EditBlockModal";
 import { useDayStore } from "@/store/dayStore";
 import type { ScheduleBlock } from "@/types/schedule";
 
-export default function ScheduleScreen() {
+export default function ScheduleTabScreen() {
   const { profile, lastResult, error, generate, reoptimize, updateBlockTime } = useDayStore();
   const [editing, setEditing] = useState<ScheduleBlock | undefined>(undefined);
 
@@ -20,7 +20,7 @@ export default function ScheduleScreen() {
       <View className="px-4 pt-4">
         <View className="flex-row items-start justify-between gap-3">
           <View className="flex-1">
-            <Text className="text-[22px] font-semibold text-black">Tu horario</Text>
+            <Text className="text-[22px] font-semibold text-black">Mi horario</Text>
             <Text className="mt-1 text-[13px] text-gray-600" numberOfLines={2}>
               {profile.dayStart}–{profile.dayEnd} · Rol: {profile.role}
             </Text>
@@ -43,7 +43,6 @@ export default function ScheduleScreen() {
 
       <Timeline blocks={blocks} onPressBlock={(b) => (!b.locked ? setEditing(b) : undefined)} />
 
-      {/* Botón flotante minimalista */}
       <View className="absolute bottom-6 left-0 right-0 items-center px-4">
         <View className="w-full max-w-[520px] flex-row gap-2 rounded-3xl border border-gray-100 bg-white p-2 shadow-sm">
           <Pressable
@@ -75,4 +74,3 @@ export default function ScheduleScreen() {
     </Screen>
   );
 }
-

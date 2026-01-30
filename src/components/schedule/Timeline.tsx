@@ -15,7 +15,7 @@ export function Timeline(props: {
         {blocks.length === 0 ? (
           <View className="rounded-2xl border border-gray-100 bg-white p-4">
             <Text className="text-[13px] text-gray-600">
-              Aún no hay rutina generada. Pulsa “Generar Rutina”.
+              Aún no hay horario. Ve a la pestaña “Asistente” para configurar tu día y generar tu horario.
             </Text>
           </View>
         ) : (

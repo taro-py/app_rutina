@@ -32,3 +32,9 @@ export function overlaps(aStart: number, aEnd: number, bStart: number, bEnd: num
   return aStart < bEnd && bStart < aEnd;
 }
 
+/** Duración en minutos de un intervalo que puede cruzar medianoche (ej. sueño 23:00–07:00) */
+export function durationMinutesOvernight(start: number, end: number): number {
+  if (end >= start) return end - start;
+  return 24 * 60 - start + end;
+}
+

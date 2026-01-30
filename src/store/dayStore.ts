@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { DayProfile, GenerateResult, TaskRequest } from "@/types/schedule";
 import { generateSchedule } from "@/agent/scheduler";
+import { hmToMinutes, minutesToHM } from "@/utils/time";
 
 type DayState = {
   profile: DayProfile;
@@ -15,6 +16,8 @@ type DayState = {
   setDayRange: (start: DayProfile["dayStart"], end: DayProfile["dayEnd"]) => void;
   setDesiredHours: (hours: number) => void;
   setSleep: (start?: DayProfile["sleepStart"], end?: DayProfile["sleepEnd"]) => void;
+  setSleepHours: (hours: number) => void;
+  setDailyGoal: (goal: string) => void;
   addFixed: (title: string, start: DayProfile["dayStart"], end: DayProfile["dayEnd"]) => void;
   removeFixed: (id: string) => void;
 
@@ -56,6 +59,20 @@ export const useDayStore = create<DayState>()(
       setDesiredHours: (hours) =>
         set((s) => ({ profile: { ...s.profile, desiredProductiveHours: Math.max(0, Math.min(24, hours)) } })),
       setSleep: (start, end) => set((s) => ({ profile: { ...s.profile, sleepStart: start, sleepEnd: end } })),
+      setSleepHours: (hours) =>
+        set((s) => {
+          const dayStartM = hmToMinutes(s.profile.dayStart);
+          const sleepEndM = dayStartM;
+          const sleepStartM = (dayStartM - hours * 60 + 24 * 60) % (24 * 60);
+          return {
+            profile: {
+              ...s.profile,
+              sleepStart: minutesToHM(sleepStartM),
+              sleepEnd: minutesToHM(sleepEndM),
+            },
+          };
+        }),
+      setDailyGoal: (goal) => set((s) => ({ profile: { ...s.profile, dailyGoal: goal } })),
 
       addFixed: (title, start, end) =>
         set((s) => ({
