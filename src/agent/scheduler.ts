@@ -1,17 +1,7 @@
 import type { DayProfile, GenerateResult, ScheduleBlock, TaskRequest } from "@/types/schedule";
 import { durationMinutes, hmToMinutes, overlaps } from "@/utils/time";
 
-/**
- * MOTOR AGENTE (LifeSync Agent)
- *
- * Este módulo contiene la lógica “no-UI”:
- * - validación de límites del día (p.ej. 26h, rangos inválidos, solapamientos)
- * - inserción automática de bloques “Comida”/“Descanso” si el usuario no los definió
- * - sugerencias de división para estudio intenso (Pomodoro o bloques de 90min)
- * - avisos si el sueño es insuficiente (< 6h)
- *
- * La UI consume `generateSchedule()` y muestra `warnings`.
- */
+
 
 function colorFor(category: ScheduleBlock["category"]): ScheduleBlock["color"] {
   switch (category) {
